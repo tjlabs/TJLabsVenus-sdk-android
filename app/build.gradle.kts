@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.tjlabs.tjlabsvenus_sdk_android"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.tjlabs.tjlabsvenus_sdk_android"
@@ -36,6 +36,13 @@ android {
 }
 
 dependencies {
+    implementation ("com.tjlabs:appcommonlib:1.0.2-olympus-platform")
+    implementation ("com.tjlabs:appresourcelib:1.0.2")
+
+    implementation ("com.tjlabs:appauthlib:1.0.2")
+    implementation ("androidx.security:security-crypto-ktx:1.1.0-alpha03") //auth 사용을 위해 같이 추가해야함
+
+    implementation ("com.google.android.material:material:1.9.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

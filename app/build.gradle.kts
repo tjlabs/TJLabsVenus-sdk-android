@@ -67,3 +67,16 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.coroutines.android)
 }
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.tjlabs"
+                artifactId = "TJLabsVenus-sdk-android"
+                version = "$versionMajor.$versionMinor.$versionPatch"
+            }
+        }
+    }
+}

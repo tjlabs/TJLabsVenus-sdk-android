@@ -26,13 +26,14 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -47,13 +48,12 @@ android {
 }
 
 dependencies {
-    implementation ("com.tjlabs:appcommonlib:1.0.2-olympus-platform")
-    implementation ("com.tjlabs:appresourcelib:1.0.2")
-
-    implementation ("com.tjlabs:appauthlib:1.0.2")
+    api ("com.tjlabs:appcommonlib:1.0.2-olympus-platform")
+    api ("com.tjlabs:appresourcelib:1.0.2")
+    api ("com.tjlabs:appauthlib:1.0.2")
     implementation ("androidx.security:security-crypto-ktx:1.1.0-alpha03") //auth 사용을 위해 같이 추가해야함
-
     implementation ("com.google.android.material:material:1.9.0")
+
     implementation (libs.opencsv)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)

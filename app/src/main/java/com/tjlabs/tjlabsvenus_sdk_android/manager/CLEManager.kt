@@ -15,7 +15,7 @@ import com.tjlabs.tjlabsvenus_sdk_android.model.JupiterRegion
 import com.tjlabs.tjlabsvenus_sdk_android.model.CoarseLocationEstOutput
 import com.tjlabs.tjlabsvenus_sdk_android.until.TJUtilFunctions
 
-class CLEManager(private val application: Application, private val tenantUserId : String) {
+internal class CLEManager(private val application: Application, private val tenantUserId : String) {
     private lateinit var venusCalcManager : CLECalcManager
 
     private var isStartService = false

@@ -9,6 +9,7 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        maven(url = "https://jitpack.io") // JitPack plugin 지원 필요 시
     }
 }
 dependencyResolutionManagement {
@@ -17,6 +18,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { setUrl(uri("/Users/yuchangsoo/local-maven-repo")) }
+        maven(url = "https://jitpack.io")
     }
 }
 

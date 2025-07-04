@@ -1,19 +1,26 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+//        id("com.android.application")
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
+    id("maven-publish")
 }
+
+val versionMajor = 1
+val versionMinor = 0
+val versionPatch = 0
 
 android {
     namespace = "com.tjlabs.tjlabsvenus_sdk_android"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.tjlabs.tjlabsvenus_sdk_android"
+//        applicationId = "com.tjlabs.tjlabsvenus_sdk_android"
+//        versionCode = 1
+//        versionName = "1.0"
         minSdk = 29
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
+        buildConfigField("String", "TJLABS_SDK_VERSION", "\"$versionMajor.$versionMinor.$versionPatch\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -33,6 +40,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -43,13 +54,17 @@ dependencies {
     implementation ("androidx.security:security-crypto-ktx:1.1.0-alpha03") //auth 사용을 위해 같이 추가해야함
 
     implementation ("com.google.android.material:material:1.9.0")
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+    implementation (libs.opencsv)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.androidx.core.ktx.v131)
     implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.appcompat.v120)
+    implementation(libs.material.v120)
+    implementation(libs.androidx.constraintlayout.v213)
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.junit.v113)
+    androidTestImplementation(libs.androidx.espresso.core.v340)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.coroutines.android)
 }

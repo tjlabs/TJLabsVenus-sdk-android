@@ -7,7 +7,7 @@ plugins {
 
 val versionMajor = 1
 val versionMinor = 0
-val versionPatch = 6
+val versionPatch = 7
 
 android {
     namespace = "com.tjlabs.tjlabsvenus_sdk_android"

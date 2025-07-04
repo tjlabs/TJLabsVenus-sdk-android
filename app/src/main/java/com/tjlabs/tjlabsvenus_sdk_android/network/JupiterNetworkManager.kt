@@ -46,16 +46,17 @@ internal object JupiterNetworkManager {
 
             override fun onResponse(call: Call<UserLoginOutput>, response: Response<UserLoginOutput>) {
                 val statusCode = response.code()
+                Log.d("VenusServiceResult", "statusCode : $statusCode // request : ${call.request()}")
+
                 if (statusCode in 200 until 300) {
                     val result = response.body()
                     if (result != null) {
                         val userSectors = result.sectors
-                        completion(TAG_USER_LOGIN, statusCode, userSectors, "success")
                         Log.d("VenusServiceResult", "postUserLogin code : $statusCode // userSectors : $userSectors")
-
+                        completion(TAG_USER_LOGIN, statusCode, userSectors, "success")
                     }
                 } else {
-                    completion(TAG_USER_LOGIN, 500, listOf(), "fail")
+                    completion(TAG_USER_LOGIN, statusCode, listOf(), "fail")
                 }
             }
         })

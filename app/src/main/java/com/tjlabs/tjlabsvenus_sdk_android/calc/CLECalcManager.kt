@@ -35,15 +35,15 @@ internal class CLECalcManager(private val application: Application, private val 
 
     fun startGenerator(completion: (Boolean, String) -> Unit) {
         rfdGenerator = RFDGenerator(application, id)
-        rfdGenerator.checkIsAvailableRfd(this) { isRfdSuccess ->
+        rfdGenerator.checkIsAvailableRfd(this) { isRfdSuccess, message ->
             if (isRfdSuccess) {
                 rfdGenerator.generateRfd(
                     RFD_INTERVAL, BLE_SCAN_WINDOW_TIME_MILLIS, -100,
                     0, getPressure = { pressure }, isSaveData = false, "aos_ble", this
                 )
-                completion(true, "")
+                completion(true, message)
             } else {
-                completion(false, "checkIsAvailableRfd : false")
+                completion(false, message)
             }
         }
     }

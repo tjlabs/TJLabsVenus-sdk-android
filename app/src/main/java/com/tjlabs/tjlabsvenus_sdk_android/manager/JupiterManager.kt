@@ -17,7 +17,7 @@ class JupiterManager(application: Application, tenantUserId : String) {
         cleManager.stopService()
     }
 
-    fun getCoarseLocationTrackingEstimation(mode : UserMode, completion: (Int, CoarseLocationEstOutput) -> Unit) {
+    fun getCoarseLocationResult(mode : UserMode, completion: (Int, CoarseLocationEstOutput) -> Unit) {
         cleManager.getVenusResult(mode) { statusCode, result ->
             completion(statusCode, result)
         }

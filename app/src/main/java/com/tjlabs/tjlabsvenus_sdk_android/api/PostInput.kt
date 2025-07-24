@@ -15,7 +15,7 @@ internal interface PostInput {
         "content-type: application/json"
     )
 
-    @POST("/{user_version}/tenant/user")
+    @POST("/{user_version}/tenants/user")
     fun postUserLogin(@Body param: UserLoginInput, @Path("user_version") userVersion : String) : Call<UserLoginOutput>
 
     @POST("/{rec_server}/received-force")

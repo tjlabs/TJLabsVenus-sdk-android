@@ -1,5 +1,4 @@
 plugins {
-//        id("com.android.application")
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("maven-publish")
@@ -7,16 +6,13 @@ plugins {
 
 val versionMajor = 1
 val versionMinor = 0
-val versionPatch = 10
+val versionPatch = 11
 
 android {
     namespace = "com.tjlabs.tjlabsvenus_sdk_android"
     compileSdk = 35
 
     defaultConfig {
-//        applicationId = "com.tjlabs.tjlabsvenus_sdk_android"
-//        versionCode = 1
-//        versionName = "1.0"
         minSdk = 29
         targetSdk = 34
 
@@ -26,7 +22,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -50,7 +46,11 @@ android {
 
 dependencies {
     api ("com.github.tjlabs:TJLabsAuth-sdk-android:1.0.2")
-    api ("com.github.tjlabs:TJLabsCommon-sdk-android:1.0.3")
+    api ("com.github.tjlabs:TJLabsCommon-sdk-android:1.0.8")
+
+    implementation ("com.github.tjlabs:jupiter-android_v2:3.4.4.3")
+    implementation ("com.github.tjlabs:olympus-android-app:0.2.27-hotfix-update")
+
     implementation ("androidx.security:security-crypto-ktx:1.1.0-alpha03") //auth 사용을 위해 같이 추가해야함
     implementation ("com.google.android.material:material:1.9.0")
 

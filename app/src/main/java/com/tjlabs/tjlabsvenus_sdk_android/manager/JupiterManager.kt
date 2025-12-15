@@ -19,7 +19,7 @@ class JupiterManager(application: Application, tenantUserId : String) {
         cleManager.stopService()
     }
 
-    fun getCoarseLocationResult(mode : UserMode, ratio : Float, completion: (Int, CoarseLocationEstOutput) -> Unit) {
+    fun getCoarseLocationResult(mode : UserMode, ratio : Float = 0.7f, completion: (Int, CoarseLocationEstOutput) -> Unit) {
 //        cleManager.getVenusResult(mode) { statusCode, result ->
 //            completion(statusCode, result)
 //        }

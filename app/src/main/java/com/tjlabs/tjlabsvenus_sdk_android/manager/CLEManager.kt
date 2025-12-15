@@ -13,6 +13,8 @@ import com.tjlabs.tjlabsvenus_sdk_android.network.JupiterNetworkConstants.getUse
 import com.tjlabs.tjlabsvenus_sdk_android.network.JupiterNetworkConstants.setServerURL
 import com.tjlabs.tjlabsvenus_sdk_android.model.JupiterRegion
 import com.tjlabs.tjlabsvenus_sdk_android.model.CoarseLocationEstOutput
+import com.tjlabs.tjlabsvenus_sdk_android.model.OnSpotAuthorizationOutput
+import com.tjlabs.tjlabsvenus_sdk_android.model.Spot
 import com.tjlabs.tjlabsvenus_sdk_android.until.TJUtilFunctions
 
 internal class CLEManager(private val application: Application, private val tenantUserId : String) {
@@ -81,6 +83,12 @@ internal class CLEManager(private val application: Application, private val tena
 
     fun getVenusResult(mode : UserMode, completion: (Int, CoarseLocationEstOutput) -> Unit) {
         venusCalcManager.calcVenusResult(mode) { statusCode, result ->
+            completion(statusCode, result)
+        }
+    }
+
+    fun getOsaResult(mode : UserMode, ratio : Float, completion: (Int, CoarseLocationEstOutput) -> Unit) {
+        venusCalcManager.calcOsaResult(mode) { statusCode, result ->
             completion(statusCode, result)
         }
     }

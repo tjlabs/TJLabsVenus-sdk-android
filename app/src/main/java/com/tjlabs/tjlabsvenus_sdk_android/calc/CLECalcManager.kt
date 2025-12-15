@@ -9,6 +9,9 @@ import com.tjlabs.tjlabsjupiter_sdk_android.data.constant.JupiterTime.BLE_SCAN_W
 import com.tjlabs.tjlabsjupiter_sdk_android.data.constant.JupiterTime.RFD_INTERVAL
 import com.tjlabs.tjlabsvenus_sdk_android.model.CoarseLocationEstInput
 import com.tjlabs.tjlabsvenus_sdk_android.model.CoarseLocationEstOutput
+import com.tjlabs.tjlabsvenus_sdk_android.model.OnSpotAuthorizationInput
+import com.tjlabs.tjlabsvenus_sdk_android.model.OnSpotAuthorizationOutput
+import com.tjlabs.tjlabsvenus_sdk_android.model.Spot
 
 internal class CLECalcManager(private val application: Application, private val region : String, userIdInput :String, sectorIdInput : Int) : RFDGenerator.RFDCallback
 {
@@ -37,10 +40,14 @@ internal class CLECalcManager(private val application: Application, private val 
         rfdGenerator = RFDGenerator(application, id)
         rfdGenerator.checkIsAvailableRfd(this) { isRfdSuccess, message ->
             if (isRfdSuccess) {
+//                rfdGenerator.generateSimulationRfd(
+//                    RFD_INTERVAL, BLE_SCAN_WINDOW_TIME_MILLIS, -100,
+//                    0, getPressure = { pressure }, baseFileName ="KR_SENSOR_WARD_20251211_144833", this)
+
                 rfdGenerator.generateRfd(
                     RFD_INTERVAL, BLE_SCAN_WINDOW_TIME_MILLIS, -100,
-                    0, getPressure = { pressure }, isSaveData = false, "aos_ble", this
-                )
+                    0, getPressure = { pressure }, isSaveData = false, "aos_ble", this)
+
                 completion(true, message)
             } else {
                 completion(false, message)
@@ -64,7 +71,21 @@ internal class CLECalcManager(private val application: Application, private val 
             normalization_scale = 1f,
             device_min_rssi = -95f
         )
+
         CLECalculator.calculation(cleInput) { statusCode, result ->
+            completion(statusCode, result)
+        }
+    }
+
+
+    fun calcOsaResult(mode: UserMode, ratio : Float = 0.7f, completion: (Int, CoarseLocationEstOutput) -> Unit) {
+        val cleInput = OnSpotAuthorizationInput(
+            tenant_user_name = id,
+            mobile_time = System.currentTimeMillis(),
+            operating_system = "Android",
+        )
+
+        CLECalculator.calculationOsa(cleInput, ratio) { statusCode, result ->
             completion(statusCode, result)
         }
     }

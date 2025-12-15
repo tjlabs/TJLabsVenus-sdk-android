@@ -5,14 +5,18 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
+import com.google.gson.Gson
 import com.tjlabs.tjlabscommon_sdk_android.rfd.ReceivedForce
 import com.tjlabs.tjlabscommon_sdk_android.uvd.UserVelocity
 import com.tjlabs.tjlabsvenus_sdk_android.api.PostInput
 import com.tjlabs.tjlabsvenus_sdk_android.model.CoarseLocationEstInput
 import com.tjlabs.tjlabsvenus_sdk_android.model.CoarseLocationEstOutput
+import com.tjlabs.tjlabsvenus_sdk_android.model.OnSpotAuthorizationInput
+import com.tjlabs.tjlabsvenus_sdk_android.model.OnSpotAuthorizationOutput
 import com.tjlabs.tjlabsvenus_sdk_android.model.Sector
 import com.tjlabs.tjlabsvenus_sdk_android.model.UserLoginInput
 import com.tjlabs.tjlabsvenus_sdk_android.model.UserLoginOutput
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -110,6 +114,39 @@ internal object JupiterNetworkManager {
                 }
             }
 
+        })
+    }
+
+    fun postOSA(url : String, input: OnSpotAuthorizationInput, cleServerVersion: String, completion: (Int, OnSpotAuthorizationOutput) -> Unit){
+        val retrofit = JupiterNetworkConstants.genRetrofit(url)
+        val postCLE = retrofit.create(PostInput::class.java)
+        postCLE.postOSA(input, cleServerVersion).enqueue(object : Callback<ResponseBody> {
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                completion(501, OnSpotAuthorizationOutput())
+            }
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                val statusCode = response.code()
+                val rawJson = response.body()?.string()
+                Log.d("VenusServiceResult", "call : ${call.request()}")
+                Log.d("VenusServiceResult", "raw json : $rawJson")
+
+                // 2) SearchTxt 객체로 변환
+                val parsed = try {
+                    Gson().fromJson(rawJson, OnSpotAuthorizationOutput::class.java)
+                } catch (e: Exception) {
+                    null
+                }
+
+                if (statusCode in 200 until 300) {
+                    if (parsed != null) {
+                        completion(statusCode, parsed)
+                    } else {
+                        completion(500, OnSpotAuthorizationOutput())
+                    }
+                } else {
+                    completion(500, OnSpotAuthorizationOutput())
+                }
+            }
         })
     }
 }

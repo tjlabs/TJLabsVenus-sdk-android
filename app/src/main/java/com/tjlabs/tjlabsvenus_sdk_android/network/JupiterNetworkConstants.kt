@@ -27,6 +27,7 @@ internal object JupiterNetworkConstants {
     private const val CALC_CLE_SERVER_VERSION = "2025-06-04"
     private const val CALC_FLT_SERVER_VERSION = "2024-12-12"
     private const val CALC_OSR_SERVER_VERSION = "2024-08-30"
+    private const val CALC_OSA_SERVER_VERSION = "2025-12-15"
 
     private const val HTTP_PREFIX = "https://"
     private var REGION_PREFIX = "ap-northeast-2."
@@ -119,6 +120,8 @@ internal object JupiterNetworkConstants {
     fun getFLTServerVersion(): String = CALC_FLT_SERVER_VERSION
 
     fun getOSRServerVersion(): String = CALC_OSR_SERVER_VERSION
+
+    fun getOSAServerVersion() : String = CALC_OSA_SERVER_VERSION
     
     class HeaderInterceptor (private val token: String) : Interceptor {
         @Throws(IOException::class)

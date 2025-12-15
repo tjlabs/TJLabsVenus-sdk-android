@@ -40,11 +40,34 @@ internal object CLECalculator {
             if (statusCode == 200) {
                 val spots = result.spots
                 val sorted = spots.sortedByDescending { it.ccs }
-                val first = sorted[0]
-                val second = sorted[1]
-                val ratio = second.ccs / first.ccs
+                Log.d("VenusServiceResult", "spots : $spots")
 
-                if (ratio <= ratioTh) {
+                if (spots.size > 1) {
+                    val first = sorted[0]
+                    val second = sorted[1]
+
+
+                    val ratio = second.ccs / first.ccs
+                    if (ratio <= ratioTh) {
+                        completion(statusCode, CoarseLocationEstOutput(
+                            mobile_time = first.mobile_time,
+                            building_name = first.building_name,
+                            level_name = first.level_name,
+                            x = first.x,
+                            y = first.y,
+                            calculated_time = first.calculated_time
+                        ))
+                    } else {
+                        completion(statusCode, CoarseLocationEstOutput(
+                            mobile_time = first.mobile_time,
+                            building_name = first.building_name,
+                            level_name = first.level_name,
+                            x = -1,
+                            y = -1,
+                            calculated_time = first.calculated_time))
+                    }
+                } else if (spots.size == 1) {
+                    val first = sorted[0]
                     completion(statusCode, CoarseLocationEstOutput(
                         mobile_time = first.mobile_time,
                         building_name = first.building_name,
@@ -55,12 +78,8 @@ internal object CLECalculator {
                     ))
                 } else {
                     completion(statusCode, CoarseLocationEstOutput(
-                        mobile_time = first.mobile_time,
-                        building_name = first.building_name,
-                        level_name = first.level_name,
                         x = -1,
-                        y = -1,
-                        calculated_time = first.calculated_time))
+                        y = -1))
                 }
             } else {
                 completion(statusCode, CoarseLocationEstOutput(

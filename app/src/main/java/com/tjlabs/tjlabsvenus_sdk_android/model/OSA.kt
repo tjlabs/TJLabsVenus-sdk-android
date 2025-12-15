@@ -21,6 +21,6 @@ data class Spot(
     val name: String = "",
     val x: Int = 0,
     val y: Int = 0,
-    val ccs: Float = 0f,
+    val ccs: Float = 1f,
     val calculated_time: Float = 0f
 )

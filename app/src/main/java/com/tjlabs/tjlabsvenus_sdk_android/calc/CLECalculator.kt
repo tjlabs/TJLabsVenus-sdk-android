@@ -40,7 +40,7 @@ internal object CLECalculator {
             if (statusCode == 200) {
                 val spots = result.spots
                 val sorted = spots.sortedByDescending { it.ccs }
-                Log.d("VenusServiceResult", "spots : $spots")
+                Log.d("VenusServiceResult", "spots : $spots ")
 
                 if (spots.size > 1) {
                     val first = sorted[0]
@@ -48,6 +48,9 @@ internal object CLECalculator {
 
 
                     val ratio = second.ccs / first.ccs
+
+                    Log.d("VenusServiceResult", "spots : $spots // ratio : $ratioTh // $ratio ")
+
                     if (ratio <= ratioTh) {
                         completion(statusCode, CoarseLocationEstOutput(
                             mobile_time = first.mobile_time,

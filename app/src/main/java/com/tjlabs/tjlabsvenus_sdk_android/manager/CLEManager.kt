@@ -88,7 +88,7 @@ internal class CLEManager(private val application: Application, private val tena
     }
 
     fun getOsaResult(mode : UserMode, ratio : Float, completion: (Int, CoarseLocationEstOutput) -> Unit) {
-        venusCalcManager.calcOsaResult(mode) { statusCode, result ->
+        venusCalcManager.calcOsaResult(mode, ratio) { statusCode, result ->
             completion(statusCode, result)
         }
     }

@@ -6,7 +6,7 @@ plugins {
 
 val versionMajor = 1
 val versionMinor = 0
-val versionPatch = 18
+val versionPatch = 19
 
 android {
     namespace = "com.tjlabs.tjlabsvenus_sdk_android"
@@ -45,7 +45,7 @@ android {
 }
 
 dependencies {
-    api ("com.github.tjlabs:TJLabsAuth-sdk-android:1.0.2")
+    api ("com.github.tjlabs:TJLabsAuth-sdk-android:1.0.4")
     api ("com.github.tjlabs:TJLabsCommon-sdk-android:1.0.8")
     implementation ("com.github.tjlabs:jupiter-android_v2:3.4.4.3")
     implementation ("androidx.security:security-crypto-ktx:1.1.0-alpha03") //auth 사용을 위해 같이 추가해야함

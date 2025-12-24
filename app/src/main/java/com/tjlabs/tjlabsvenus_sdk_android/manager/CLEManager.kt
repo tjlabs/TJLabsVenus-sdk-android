@@ -25,7 +25,7 @@ internal class CLEManager(private val application: Application, private val tena
     private var deviceIdentifier = Build.MANUFACTURER
     private var deviceOsVersion = Build.VERSION.SDK_INT
 
-    private var sendRfdLength = 2
+    private var sendRfdLength = 1
     private var sendUvdLength = 4
 
     private val sdkVersion: String = BuildConfig.TJLABS_SDK_VERSION

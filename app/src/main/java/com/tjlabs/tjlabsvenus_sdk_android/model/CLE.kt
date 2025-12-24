@@ -17,6 +17,7 @@ data class CoarseLocationEstOutput (
     val level_name : String = "",
     val scc : Float = 0f,
     val scr : Float = 0f,
+    val ccs : Float = 0f,
     val x : Int = 0,
     val y : Int = 0,
     val calculated_time : Float = 0f,

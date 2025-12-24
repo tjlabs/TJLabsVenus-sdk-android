@@ -57,6 +57,7 @@ internal object CLECalculator {
                             level_name = first.level_name,
                             x = first.x,
                             y = first.y,
+                            ccs = first.ccs,
                             calculated_time = first.calculated_time,
                             ratio = ratio
                         ))
@@ -67,6 +68,7 @@ internal object CLECalculator {
                             level_name = first.level_name,
                             x = first.x,
                             y = first.y,
+                            ccs = first.ccs,
                             calculated_time = first.calculated_time,
                             ratio = ratio))
                     }
@@ -78,6 +80,7 @@ internal object CLECalculator {
                         level_name = first.level_name,
                         x = first.x,
                         y = first.y,
+                        ccs = first.ccs,
                         calculated_time = first.calculated_time,
                     ))
                 } else {

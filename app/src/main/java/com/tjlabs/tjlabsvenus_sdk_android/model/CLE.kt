@@ -19,5 +19,6 @@ data class CoarseLocationEstOutput (
     val scr : Float = 0f,
     val x : Int = 0,
     val y : Int = 0,
-    val calculated_time : Float = 0f
+    val calculated_time : Float = 0f,
+    val ratio : Float = 0f
 )

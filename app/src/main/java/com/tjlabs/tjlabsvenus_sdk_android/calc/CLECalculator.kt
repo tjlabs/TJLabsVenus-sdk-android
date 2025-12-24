@@ -46,7 +46,6 @@ internal object CLECalculator {
                     val first = sorted[0]
                     val second = sorted[1]
 
-
                     val ratio = second.ccs / first.ccs
 
                     Log.d("VenusServiceResult", "spots : $spots // ratio : $ratioTh // $ratio ")
@@ -58,16 +57,18 @@ internal object CLECalculator {
                             level_name = first.level_name,
                             x = first.x,
                             y = first.y,
-                            calculated_time = first.calculated_time
+                            calculated_time = first.calculated_time,
+                            ratio = ratio
                         ))
                     } else {
                         completion(statusCode, CoarseLocationEstOutput(
                             mobile_time = first.mobile_time,
                             building_name = first.building_name,
                             level_name = first.level_name,
-                            x = -1,
-                            y = -1,
-                            calculated_time = first.calculated_time))
+                            x = first.x,
+                            y = first.y,
+                            calculated_time = first.calculated_time,
+                            ratio = ratio))
                     }
                 } else if (spots.size == 1) {
                     val first = sorted[0]
@@ -77,7 +78,7 @@ internal object CLECalculator {
                         level_name = first.level_name,
                         x = first.x,
                         y = first.y,
-                        calculated_time = first.calculated_time
+                        calculated_time = first.calculated_time,
                     ))
                 } else {
                     completion(statusCode, CoarseLocationEstOutput(
